@@ -1,41 +1,21 @@
 pipeline {
     agent any
-    environment {
-        APP_ENV = 'test'
-    }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
-                sh 'echo Building'
+                echo 'Building the project'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo Running tests'
-            }
-        }
-        stage('Deploy') {
-            when {
-                branch 'master'
-            }
-            steps {
-                withCredentials([string(credentialsId: 'deploy-token', variable: 'TOKEN')]) {
-                    sh 'echo Deploying with a token'
-                }
+                echo 'Running tests'
             }
         }
     }
     post {
         success {
-            echo 'All stages passed'
-        }
-        failure {
-            echo 'Something failed'
+            echo 'Pipeline succeeded'
         }
     }
 }
+
