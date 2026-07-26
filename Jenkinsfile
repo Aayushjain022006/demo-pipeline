@@ -1,12 +1,12 @@
 pipeline {
     agent any
 
-    Parameters {
+    Parameters{
         choice(name: 'ENVIRONMENT', choices: [['staging','production']], description: 'Target environment')
     }
 
     environment {
-        APP_NAME = 'demo-app'
+        APP_NAME='demo-app'
     }
 
     stages {
@@ -33,10 +33,10 @@ pipeline {
 
         stage('Approve') {
             when {
-                expression { params.ENVIRONMENT == Production }
+                expression { params.ENVIRONMENT==Production }
             }
             steps {
-                Inputmessage: 'Deploy to production?'
+                Input message: 'Deploy to production?'
             }
         }
 
@@ -48,10 +48,10 @@ pipeline {
     }
 
     post {
-        Succes {
+        Succes{
             echo 'Pipeline succeeded'
         }
-        Fail {
+        Fail{
             echo 'Pipeline failed'
         }
     }
