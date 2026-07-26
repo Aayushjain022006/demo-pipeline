@@ -47,7 +47,7 @@ pipeline {
     }
 
     post {
-        succes{
+        success{
             echo 'Pipeline succeeded'
         }
         failure{
